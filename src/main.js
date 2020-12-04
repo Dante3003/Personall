@@ -2,6 +2,12 @@ import Vue from 'vue'
 import App from './App.vue'
 import router from './router'
 import store from './store'
+import Vuelidate from 'vuelidate'
+import { BootstrapVue } from 'bootstrap-vue'
+import 'nprogress/nprogress.css'
+
+Vue.use(Vuelidate)
+Vue.use(BootstrapVue)
 
 Vue.config.productionTip = false
 
