@@ -1,5 +1,4 @@
 import Axios from 'axios'
-// import NProgress from 'nprogress'
 
 const apiClient = Axios.create({
   baseURL: 'http://localhost:3000',

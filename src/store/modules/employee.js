@@ -24,7 +24,7 @@ export const mutations = {
 
 export const actions = {
   fetchEmployees: ({ commit }) => {
-    apiClient.getEmployees()
+    return apiClient.getEmployees()
       .then(res => {
         commit('SET_TOTAL', res.headers['x-total-count'])
         commit('SET_EMPLOYEES', res.data)
