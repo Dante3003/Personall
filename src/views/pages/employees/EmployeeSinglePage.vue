@@ -136,7 +136,7 @@ export default {
     return {
       dismissSecs: 5,
       dismissCountDown: 0,
-      editable: false
+      editable: (Number(this.id) === 0)
     }
   },
   methods: {
