@@ -1,5 +1,5 @@
 <template>
-  <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12 d-flex flex-column mb-4">
+  <div class="col-lg-4 col-md-6 col-sm-12 col-xs-12 d-flex flex-column mb-4">
     <div
       class="card h-100 p-2 btn"
       :class="{'shadow-lg': isHovered}"

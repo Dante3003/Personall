@@ -18,12 +18,12 @@
           :employee="employee"
         />
       </div>
-      <div class="d-flex align-items-center">
+      <div v-if="pages > 1" class="d-flex align-items-center">
         <router-link
           v-if="currPage != 1"
           :to="{ name: 'Employees', query: { page: currPage - 1 } }"
           rel="prev"
-          >&lt; Предыдущая</router-link>
+        >&lt; Предыдущая</router-link>
         <div
           class="btn"
           :class="{ disabled: page === currPage }"
@@ -37,7 +37,7 @@
           v-if="hasNextPage"
           :to="{ name: 'Employees', query: { page: currPage + 1 } }"
           rel="next"
-          >Следющая &gt;</router-link>
+        >Следющая &gt;</router-link>
       </div>
     </div>
   </div>
