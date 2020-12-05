@@ -1,8 +1,8 @@
 <template>
   <div class="col-md-4 col-sm-4 mb-4">
       <div class="card d-flex align-items-center shadow-sm text-light bg-dark pt-2">
-        <div class="card-icon rounded-circle bg-dark p-4 w-25">
-            <img :src="require('@/assets/' + img)" alt="icon" class="w-100 ">
+        <div class="card-icon rounded-circle bg-dark p-4 w-50">
+            <img :src="require('@/assets/' + img)" alt="icon" class="w-100">
         </div>
         <div class="card-body">
             <h6>{{title}}</h6>

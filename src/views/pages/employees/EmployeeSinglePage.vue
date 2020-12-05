@@ -8,6 +8,7 @@
           placeholder="ФИО"
           id="name"
           class="form-control"
+          :disabled="!editable"
           :class="{'border border-danger': $v.currentEmployee.fullName.$error}"
           v-model="currentEmployee.fullName"
           @blur="$v.currentEmployee.fullName.$touch()"
@@ -26,6 +27,7 @@
           v-model="currentEmployee.dep"
           class="form-control"
           :class="{'border border-danger': $v.currentEmployee.dep.$error}"
+          :disabled="!editable"
           @blur="$v.currentEmployee.dep.$touch()"
         >
           <option :value="dep" v-for="dep in department" :key="dep">{{dep}}</option>
@@ -43,6 +45,7 @@
           :class="{'border border-danger': $v.currentEmployee.position.$error}"
           v-model="currentEmployee.position"
           @blur="$v.currentEmployee.position.$touch()"
+          :disabled="!editable"
         />
         <template v-if="$v.currentEmployee.position.$error">
           <p v-if="!$v.currentEmployee.position.required" class="text-danger">Это поле объязательно нужно заполнить!</p>
@@ -52,10 +55,10 @@
 
       <div class="form-group mb-3">
         <span class="font-weight-bold">Пол: </span>
-        <input type="radio" name="gender" id="man" value="Муж"  v-model="currentEmployee.gender" />
+        <input type="radio" name="gender" id="man" value="Муж"  v-model="currentEmployee.gender" :disabled="!editable" />
         <label for="man" class="mb-0 mr-2">Муж</label>
 
-        <input type="radio" name="gender" id="woman" value="Жен" v-model="currentEmployee.gender" />
+        <input type="radio" name="gender" id="woman" value="Жен" v-model="currentEmployee.gender" :disabled="!editable" />
         <label for="woman" class="mb-0">Жен</label>
       </div>
 
@@ -69,6 +72,7 @@
           v-model="currentEmployee.birth"
           :class="{'border border-danger': $v.dateObject.$error}"
           @blur="$v.dateObject.$touch()"
+          :disabled="!editable"
         />
         <template v-if="$v.dateObject.$error">
           <p class="text-danger">Укажите правильную дату</p>
@@ -80,7 +84,16 @@
           variant="success"
           @click.prevent="save"
           :disabled="$v.$anyError"
+          v-if="editable || Number(id) === 0"
         >Сохранить</b-button>
+
+        <b-button
+          variant="info"
+          v-else
+          @click.prevent="edit"
+        >
+          Изменить
+        </b-button>
 
         <b-button
           variant="secondary"
@@ -122,7 +135,8 @@ export default {
   data () {
     return {
       dismissSecs: 5,
-      dismissCountDown: 0
+      dismissCountDown: 0,
+      editable: false
     }
   },
   methods: {
@@ -142,6 +156,9 @@ export default {
     deleteEmployee () {
       this.delEmployee(this.id)
       this.$router.push({ name: 'Employees' })
+    },
+    edit () {
+      this.editable = !this.editable
     }
   },
   computed: {

@@ -2,24 +2,13 @@
   <div class="">
     <div class="container">
       <h1 class="mb-3 pt-2">Сотрудники</h1>
-      <div class="row d-flex justify-content-end pb-3">
-        <div class="mr-3">
-          <label for="departments">Фильтр по отделу: </label>
-          <select name="department" id="departments" v-model="depFilter">
-            <option value="Все">Все</option>
-            <option :value="dep" v-for="dep in department" :key="dep">
-              {{ dep }}
-            </option>
-          </select>
-        </div>
-        <div>
-          <label for="gender">Фильтрация по полу</label>
-          <select name="gender" id="gender" v-model="genFilter">
-            <option value="Все">Все</option>
-            <option value="Муж">Муж</option>
-            <option value="Жен">Жен</option>
-          </select>
-        </div>
+      <div class="row d-flex justify-content-end">
+        <b-form-group label="Фильтры по отделу:" label-for="ratio" label-cols-md="auto" class="mr-3">
+          <b-form-select id="ratio" v-model="depFilter" :options="department"></b-form-select>
+        </b-form-group>
+        <b-form-group label="Фильтр по полу:" label-for="gender" label-cols-md="auto" class="">
+          <b-form-select id="gender" v-model="genFilter" :options="genders"></b-form-select>
+        </b-form-group>
       </div>
       <p v-if="!paginatedEmployees.length">Сотрдуников не найдено!</p>
       <div class="row d-flex">
@@ -64,7 +53,8 @@ export default {
     return {
       depFilter: 'Все',
       genFilter: 'Все',
-      isHovered: false
+      isHovered: false,
+      genders: ['Все', 'Жен', 'Муж']
     }
   },
   components: {
@@ -88,7 +78,9 @@ export default {
     ...mapState({
       employees: state => state.employee.employees,
       totalEmployees: state => state.employee.totalEmployees,
-      department: state => state.dep.dep
+      department: state => {
+        return ['Все', ...state.dep.dep]
+      }
     }),
     currPage () {
       return parseInt(this.$route.query.page || 1)
